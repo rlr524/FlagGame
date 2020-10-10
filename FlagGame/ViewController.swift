@@ -58,6 +58,7 @@ class ViewController: UIViewController {
     
     func newGame(action: UIAlertAction! = nil) {
         score = 0
+        questionsAsked = 0
         askQuestion()
     }
     
@@ -80,15 +81,14 @@ class ViewController: UIViewController {
         // For the preferredStyle, we can choose .alert for a popup box in the middle of the screen (to tell user of a situation change) or we can use .actionSheet which brings up options from the bottom (for asking users to choose from a set of options)
         // On addAction, the handler is looking for a closure; we're passing it the askQuestion method that we already defined. Remember, a closure in its most basic state is just a function that is passed to another function as an argument
         var ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
-        if questionsAsked <= 9 {
+        if questionsAsked <= 11 {
             ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
             present(ac, animated: true)
         } else {
             ac = UIAlertController(title: title, message: "Your final score is \(score)", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Play Again", style: .default, handler: newGame))
+            ac.addAction(UIAlertAction(title: "Play Again?", style: .default, handler: newGame))
             present(ac, animated: true)
         }
-        // MARK: - Bug: Need to fix score on new game function; currently it keeps the score at zero
     }
     
     override func didReceiveMemoryWarning() {
