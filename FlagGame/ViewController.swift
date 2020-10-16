@@ -44,6 +44,8 @@ class ViewController: UIViewController {
         button3.layer.borderColor = UIColor.lightGray.cgColor
         
         askQuestion()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(showScore))
     }
     
     func askQuestion(action: UIAlertAction! = nil) {
@@ -94,5 +96,12 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated
+    }
+    
+    @objc func showScore() {
+        let displayScore = ["Your score is \(score)"]
+        let ac = UIActivityViewController(activityItems: displayScore, applicationActivities: [])
+        ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(ac, animated: true)
     }
 }
